@@ -1,0 +1,225 @@
+#userNameInput::placeholder {
+  color: rgba(219, 216, 216, 0.795);
+  font-weight: bold;
+}
+
+#userNameInput {
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 2px rgba(255, 255, 255, 0.7) solid;
+  border-radius: 7px;
+  height: 45px;
+  padding: 0 10px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+#inventBadAnswerDiv {
+  background-color: #f7e400;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bolder;
+  font-size: 30px;
+  color: #94111e;
+}
+
+#moreThanRealDiv {
+  background-color: #690b12;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bolder;
+  font-size: 25px;
+  color: #f7e400;
+  position: absolute;
+  top: 60;
+  font-style: italic;
+}
+
+#sloganDiv {
+  position: relative;
+}
+
+/* CSS */
+#buttonCreateGame {
+  align-items: center;
+  appearance: none;
+  background-clip: padding-box;
+  background-color: initial;
+  background-image: none;
+  border-style: none;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  flex-direction: row;
+  flex-shrink: 0;
+  font-family: Eina01, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 24px;
+  margin: 0;
+  min-height: 64px;
+  outline: none;
+  overflow: visible;
+  padding: 19px 26px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: auto;
+  word-break: keep-all;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  #buttonCreateGame {
+    padding: 19px 32px;
+  }
+}
+
+@media (max-width: 1200px) {
+  #gameExplainationCol {
+    width: 720px;
+    margin-top: 20px;
+    margin-left: 0px !important;
+  }
+}
+
+#gameExplainationCol {
+  border: 3px solid #690b12;
+  padding: 20px;
+  margin-left: 10px;
+  border-radius: 10px;
+}
+
+@media (min-width: 1200px) {
+  #welcomePage {
+    height: 100%;
+  }
+}
+#welcomePage {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to right, #7d0d15, #8c0e17);
+}
+
+#buttonCreateGame:before,
+#buttonCreateGame:after {
+  border-radius: 80px;
+}
+
+#buttonCreateGame:before {
+  background-color: rgba(249, 58, 19, 0.32);
+  content: "";
+  display: block;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: -2;
+}
+
+#buttonCreateGame:after {
+  background-color: initial;
+  background-image: linear-gradient(92.83deg, #af470a 0, #f93a13 100%);
+  bottom: 4px;
+  content: "";
+  display: block;
+  left: 4px;
+  overflow: hidden;
+  position: absolute;
+  right: 4px;
+  top: 4px;
+  transition: all 100ms ease-out;
+  z-index: -1;
+}
+
+/* CSS */
+#reloadImgButton {
+  background-color: #fbeee0;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 40px;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+#reloadImgButton:hover {
+  background-color: #fff;
+}
+
+#reloadImgButton:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+#footer {
+  flex-shrink: 0;
+  background-color: #690b12;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+  color: lightgrey;
+}
+
+#welcomeContent {
+  flex: 1 0 auto;
+  padding: 10px;
+}
+
+.stepRule {
+  background-color: #690b12;
+  font-size: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 5px;
+  margin-right: 10px;
+  color: #f7e400;
+}
+
+#avatarCol {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-right: 30px;
+}
+
+#createPartyCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+
+@media (max-width: 660px) {
+  #createPartyCol {
+    margin-top: 20px;
+    width: 100%;
+  }
+  #avatarCol {
+    margin-right: inherit;
+    margin: auto;
+  }
+}

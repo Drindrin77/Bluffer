@@ -1,0 +1,6 @@
+#welcomePage {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to right, #7d0d15, #8c0e17);
+}
