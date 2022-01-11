@@ -15,10 +15,12 @@ module.exports = async function (sequelize, DataTypes) {
       nbPlayerMax: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 2,
       },
       maxScore: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        defaultValue: 12,
       },
       idRoomSocket: {
         type: DataTypes.STRING,
@@ -26,6 +28,7 @@ module.exports = async function (sequelize, DataTypes) {
       },
       idAdmin: {
         type: DataTypes.INTEGER,
+        allowNull: false,
         references: {
           model: "user",
           key: "id",

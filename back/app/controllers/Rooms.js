@@ -12,7 +12,7 @@ module.exports = (app) => {
         return next(e);
       }
     },
-    delete: () => {},
+    update: async (req, res, next) => {},
     findOne: () => {},
   };
 };

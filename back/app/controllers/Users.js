@@ -4,16 +4,15 @@ const {
     models: { User },
   },
 } = require("../models");
-const { v4: uuidv4 } = require("uuid");
+const jwt = require("jsonwebtoken");
 
 module.exports = (app) => {
   return {
-    insert: async (req, res, next) => {
+    authGuest: async (req, res, next) => {
       try {
         const user = await User.create(req.body);
-        const socketHandler = app.get("socketHandler");
-        const idRoomSocket = uuidv4();
-
+        const token = jwt.sign({ id: user.id }, "bluffer2022leanna@");
+        res.setHeader("Authorization", "Bearer " + token);
         res.status(201).send(user);
       } catch (e) {
         return next(e);
