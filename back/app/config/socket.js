@@ -8,7 +8,12 @@ module.exports = async (server) => {
   io.on("connection", (socket) => {
     console.log("A client try to join a room");
     for (const client of io.sockets.sockets) {
-      if (socket.handshake.address === client[1].handshake.address) {
+      console.log(socket.id);
+      console.log(client[0]);
+      if (
+        socket.id !== client[0] &&
+        socket.handshake.address === client[1].handshake.address
+      ) {
         socket.emit("socketAlreadyExists", {
           message: "user already connected",
         });
