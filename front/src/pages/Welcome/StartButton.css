@@ -1,46 +1,19 @@
-.wrapper {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-#buttonCreateGame {
-  display: block;
-  width: 200px;
-  height: 40px;
-  line-height: 40px;
-  font-size: 18px;
-  font-family: sans-serif;
-  text-decoration: none;
-  color: #333;
-  border: 2px solid #333;
-  letter-spacing: 2px;
+.activated {
+  padding: 5px;
+  background-color: rgba(218, 120, 120, 0.877);
   text-align: center;
-  position: relative;
-  transition: all 0.35s;
+  border-radius: 6px;
+  font-size: 25px;
+  cursor: pointer;
+  transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
-#buttonCreateGame span {
-  position: relative;
-  z-index: 2;
-}
-
-#buttonCreateGame:after {
-  position: absolute;
-  content: "";
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background: #ff003b;
-  transition: all 0.35s;
-}
-
-#buttonCreateGame:hover {
-  color: #fff;
-}
-
-#buttonCreateGame:hover:after {
-  width: 100%;
+.disabled {
+  padding: 5px;
+  background-color: rgba(0, 0, 0, 0.877);
+  text-align: center;
+  border-radius: 6px;
+  font-size: 25px;
+  cursor: not-allowed;
+  transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
