@@ -27,7 +27,7 @@ export const Welcome = (props) => {
   const createGame = () => {
     if (userName !== "" && socket) {
       UserAPI.createUser(userName, socket.id).then((res) => {
-        console.log(res.headers.Authorization);
+        console.log(res);
 
         //RoomAPI.createRoom(user.idUser);
       });
