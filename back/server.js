@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 
 app.use(
   cors({
-    allowedHeaders: ["Content-Type", "Authorization"],
+    exposedHeaders: ["Authorization"],
   })
 );
 app.use(bodyParser.urlencoded({ extended: true }));
