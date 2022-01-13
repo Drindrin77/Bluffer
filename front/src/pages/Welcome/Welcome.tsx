@@ -3,26 +3,42 @@ import * as React from "react";
 import { FieldTimeOutlined, ReloadOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
 import "./Welcome.css";
 import { rules } from "../../Instruction";
+import { SocketContext } from "../../context/socket";
+import { UserAPI } from "../../api/UserAPI";
+import { TitleGame } from "./TitleGame";
+
 const { Title } = Typography;
 
 export const Welcome = (props) => {
+  const socket = React.useContext(SocketContext);
+  const [isPageLoading, setIsPageLoading] = React.useState(true);
+  const [userName, setUserName] = React.useState("");
+
+  React.useEffect(() => {
+    socket.on("connectionEstablished", (data) => {
+      setIsPageLoading(false);
+    });
+    socket.on("socketAlreadyExists", (data) => {
+      alert();
+      //redirect page error
+    });
+  }, [socket]);
+
+  const createGame = () => {
+    if (userName !== "" && socket) {
+      UserAPI.createUser(userName, socket.id).then((res) => {
+        console.log(res.headers.Authorization);
+
+        //RoomAPI.createRoom(user.idUser);
+      });
+    }
+  };
+
   return (
     <div id="welcomePage">
       <div id="welcomeContent">
-        <Row justify="center">
-          <Title
-            style={{
-              fontSize: 100,
-              color: "white",
-            }}
-          >
-            Bluffer
-          </Title>
-        </Row>
-        <Row justify="center" id="sloganDiv">
-          <div id="inventBadAnswerDiv">Inventez une fausse réponse...</div>
-          <div id="moreThanRealDiv">plus vraie que la vraie !</div>
-        </Row>
+        <TitleGame />
+
         <Row justify="center" style={{ marginTop: 100 }}>
           <Col flex="720px" style={{ backgroundColor: "#690B12", padding: 20, borderRadius: 10 }}>
             <Row justify="center">
@@ -38,10 +54,17 @@ export const Welcome = (props) => {
                 </button>
               </Col>
               <Col id="createPartyCol">
-                <input type="text" placeholder="Pseudonyme" id="userNameInput" />
-                <button id="buttonCreateGame" role="button">
+                <input
+                  type="text"
+                  placeholder="Pseudonyme"
+                  id="userNameInput"
+                  value={userName}
+                  onChange={(event) => setUserName(event.target.value)}
+                />
+
+                <Button type="primary" disabled={userName === ""} onClick={() => createGame()}>
                   Créer une partie
-                </button>
+                </Button>
               </Col>
             </Row>
           </Col>
