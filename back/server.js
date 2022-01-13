@@ -23,9 +23,9 @@ app.use((err, req, res, next) => {
   res.status(status || 500).json({ error: message || "Internal server error" });
 });
 
-db.sequelize.sync({ alter: true }).then(() => {
+db.sequelize.sync({ alter: true }).then(async () => {
   const server = require("http").Server(app);
-  const socketHandler = require("./app/config/socket")(server);
+  const socketHandler = await require("./app/config/socket")(server);
   app.set("socketHandler", socketHandler);
   server.listen(port, () => console.log(`Listening on port ${port}`));
 });
