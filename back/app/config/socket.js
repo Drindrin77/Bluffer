@@ -7,19 +7,19 @@ module.exports = async (server) => {
 
   io.on("connection", (socket) => {
     console.log("A client try to join a room");
-    const clients = io.sockets.adapter.rooms.get("test");
+    const clients = io.sockets.client();
     if (clients) {
       for (const clientId of clients) {
         const clientSocket = io.sockets.sockets.get(clientId);
         if (socket.handshake.address === clientSocket.handshake.address) {
-          socket.emit("FromAPI", "Utilisateur déjà connecté");
+          socket.emit("socketAlreadyExists", {
+            message: "user already connected",
+          });
           return;
         }
       }
     }
-    console.log("client joined room");
-    socket.join("test");
-    socket.emit("FromAPI", "connecté");
+    socket.emit("connectionEstablished", { message: "ok" });
 
     socket.on("disconnect", () => {
       console.log("Client disconnected");
