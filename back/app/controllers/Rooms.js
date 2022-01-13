@@ -1,7 +1,7 @@
 const {
   Sequelize,
   sequelize: {
-    models: { Rooms },
+    models: { Room },
   },
 } = require("../models");
 
@@ -14,7 +14,7 @@ module.exports = (app) => {
         const { id: idAdmin, socketId } = req.currentUser;
         const idRoomSocket = uuidv4();
 
-        const room = await Rooms.create({
+        const room = await Room.create({
           idAdmin,
           idRoomSocket,
         });
