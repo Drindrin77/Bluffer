@@ -5,7 +5,11 @@ const port = process.env.PORT || 5001;
 const app = express();
 const bodyParser = require("body-parser");
 
-app.use(cors());
+app.use(
+  cors({
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 require("./app/config/routes")(app);
