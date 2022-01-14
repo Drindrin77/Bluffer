@@ -28,7 +28,18 @@ module.exports = (app) => {
         return next(e);
       }
     },
-    update: async (req, res, next) => {},
+    update: async (req, res, next) => {
+      try {
+        const room = await Room.findOne({ where: { id: req.params.id } });
+        await room.update({
+          ...req.body,
+        });
+        await room.save({ fields: ["nbPlayerMax", "maxScore"] });
+        res.status(200).send(room);
+      } catch (e) {
+        return next(e);
+      }
+    },
     findOne: () => {},
   };
 };

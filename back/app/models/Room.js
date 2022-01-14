@@ -16,11 +16,19 @@ module.exports = async function (sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 2,
+        validate: {
+          min: 2,
+          max: 10,
+        },
       },
       maxScore: {
         type: DataTypes.INTEGER,
         allowNull: false,
         defaultValue: 12,
+        validate: {
+          min: 12,
+          max: 20,
+        },
       },
       idRoomSocket: {
         type: DataTypes.STRING,
