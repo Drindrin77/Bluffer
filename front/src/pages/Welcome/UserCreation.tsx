@@ -1,30 +1,25 @@
 import { ReloadOutlined } from "@ant-design/icons";
-import { Avatar, Button, Col, Row, Typography } from "antd";
+import { Avatar, Col, Row, Typography } from "antd";
 import * as React from "react";
-import { UserAPI } from "../../api/UserAPI";
+import { useHistory } from "react-router-dom";
+import { PostGameActions } from "../../actions/PostGameActions";
 import { SocketContext } from "../../context/socket";
-import { rules } from "../../Instruction";
-import { BottomDescription } from "./BottomDescription";
-import { GameExplaination } from "./GameExplaination";
 import { StartButton } from "./StartButton";
-import { TitleGame } from "./TitleGame";
 import "./Welcome.css";
-
 const { Title } = Typography;
 
 export const UserCreation = (props) => {
   const [userName, setUserName] = React.useState("");
   const socket = React.useContext(SocketContext);
-
-  const createGame = () => {
+  const history = useHistory();
+  async function createGame() {
     if (userName !== "" && socket) {
-      UserAPI.createUser(userName, socket.id).then((res) => {
-        console.log(res);
-
-        //RoomAPI.createRoom(user.idUser);
-      });
+      const result = await PostGameActions.createGame(userName, socket.id);
+      if (result) {
+        history.push("/lobby");
+      }
     }
-  };
+  }
 
   return (
     <Col flex="720px" style={{ backgroundColor: "#690B12", padding: 20, borderRadius: 10 }}>
@@ -49,10 +44,7 @@ export const UserCreation = (props) => {
             onChange={(event) => setUserName(event.target.value)}
           />
 
-          <StartButton isDisabled={userName === ""} />
-          <Button type="primary" disabled={userName === ""} onClick={() => createGame()}>
-            Créer une partie
-          </Button>
+          <StartButton isDisabled={userName === ""} onClick={() => createGame()} />
         </Col>
       </Row>
     </Col>

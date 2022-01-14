@@ -10,10 +10,15 @@
 
 .disabled {
   padding: 5px;
-  background-color: rgba(0, 0, 0, 0.877);
+  background-color: rgba(56, 56, 56, 0.774);
   text-align: center;
   border-radius: 6px;
   font-size: 25px;
   cursor: not-allowed;
   transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.activated:hover {
+  background-color: rgba(202, 63, 63, 0.877);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }

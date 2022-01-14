@@ -1,6 +1,7 @@
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Col, Row, Typography } from "antd";
 import * as React from "react";
+import { TitleGame } from "../../components/TitleGame/TitleGame";
 const { Title } = Typography;
 
 const players = [
@@ -22,16 +23,7 @@ export const Lobby = (props) => {
 
   return (
     <div id="welcomePage">
-      <Row justify="center">
-        <Title
-          style={{
-            fontSize: 100,
-            color: "white",
-          }}
-        >
-          Bluffer
-        </Title>
-      </Row>
+      <TitleGame onlyTitle />
       <Row justify="center">
         <Col span={6} style={{ border: "1px solid black", padding: 10 }}>
           <Row justify="center">
@@ -61,8 +53,7 @@ const Player = (props) => {
   const color = player ? "white" : "grey";
   return (
     <div style={{ padding: 10, border: borderStyle, width: "100%", borderRadius: 10, marginTop: 10, color: color }}>
-      {player && <Avatar size={64} src={player.image} />}
-      {!player && <Avatar size={64} icon={<UserOutlined />} />}
+      {player ? <Avatar size={64} src={player.image} /> : <Avatar size={64} icon={<UserOutlined />} />}
       {name}
     </div>
   );

@@ -1,0 +1,28 @@
+#inventBadAnswerDiv {
+  background-color: #f7e400;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bolder;
+  font-size: 30px;
+  color: #94111e;
+}
+
+#moreThanRealDiv {
+  background-color: #690b12;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-weight: bolder;
+  font-size: 25px;
+  color: #f7e400;
+  position: absolute;
+  top: 60;
+  font-style: italic;
+}
+
+#sloganDiv {
+  position: relative;
+}
