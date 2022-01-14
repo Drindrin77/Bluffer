@@ -3,27 +3,14 @@ const lodash = require("lodash");
 const name = path.basename(__filename, ".js");
 const displayName = name.charAt(0).toLocaleLowerCase() + name.slice(1);
 module.exports = async function (sequelize, DataTypes) {
-  const { Room } = sequelize.models;
-  const User = sequelize.define(
+  const { Room, User } = sequelize.models;
+  const UserRoom = sequelize.define(
     name,
-    {
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      socketId: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      score: {
-        type: DataTypes.INTEGER,
-        default: 0,
-        allowNull: true,
-      },
-    },
+    {},
     {
       freezeTableName: true,
       underscored: true,
+      timestamps: false,
       name: {
         singular: displayName,
         plural: displayName + "s",
@@ -32,5 +19,8 @@ module.exports = async function (sequelize, DataTypes) {
     }
   );
 
-  return User;
+  User.belongsToMany(Room, { through: UserRoom });
+  Room.belongsToMany(User, { through: UserRoom });
+
+  return UserRoom;
 };
