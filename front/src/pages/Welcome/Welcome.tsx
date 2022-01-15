@@ -1,6 +1,6 @@
 import { Row } from "antd";
 import * as React from "react";
-import { Footer } from "../../components/Footer";
+import { BlufferFooter } from "../../components/Footer";
 import { TitleGame } from "../../components/TitleGame/TitleGame";
 import { BottomDescription } from "./BottomDescription";
 import { GameExplaination } from "./GameExplaination";
@@ -21,7 +21,7 @@ export const Welcome = (props) => {
         <BottomDescription />
       </div>
 
-      <Footer />
+      <BlufferFooter />
     </div>
   );
 };

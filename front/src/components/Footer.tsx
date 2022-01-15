@@ -1,11 +1,9 @@
 import * as React from "react";
 
-export const Footer = (props) => {
+export const BlufferFooter = (props) => {
   return (
     <div
-      id="footer"
       style={{
-        flexShrink: 0,
         backgroundColor: "#690b12",
         paddingTop: 10,
         paddingBottom: 10,
