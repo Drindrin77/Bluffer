@@ -1,8 +1,7 @@
-import { Button, Carousel, Col, Input, Row, Typography, Avatar } from "antd";
+import { Col, Row, Typography } from "antd";
 import * as React from "react";
-import { FieldTimeOutlined, ReloadOutlined, TeamOutlined, UserOutlined } from "@ant-design/icons";
-import "./Welcome.css";
 import { rules } from "../../Instruction";
+import "./index.css";
 
 const { Title } = Typography;
 

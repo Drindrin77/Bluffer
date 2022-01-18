@@ -1,15 +1,9 @@
-import { CrownFilled, CrownTwoTone, UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Col, Row, Tag, Typography } from "antd";
-import Layout, { Content, Footer, Header } from "antd/lib/layout/layout";
+import { CrownFilled } from "@ant-design/icons";
+import { Avatar, Col } from "antd";
 import * as React from "react";
-import { BlufferFooter } from "../../components/Footer";
-import { TitleGame } from "../../components/TitleGame/TitleGame";
-import "./Lobby.css";
-const { Title } = Typography;
 
 const players = [
   { userName: "Drindrin", image: "https:joeschmoe.io/api/v1/random", mine: true, admin: true },
-  { userName: "Nicouli", image: "https:joeschmoe.io/api/v1/random" },
   { userName: "Nicouli", image: "https:joeschmoe.io/api/v1/random" },
   { userName: "Nicouli", image: "https:joeschmoe.io/api/v1/random" },
   { userName: "Nicouli", image: "https:joeschmoe.io/api/v1/random" },
@@ -39,7 +33,7 @@ export const PlayerList = (props) => {
             {players.map((player, index) => {
               return (
                 <div
-                  key={index}
+                  key={"player-" + index}
                   className="playerContainer"
                   style={{
                     border: player.mine ? "3px solid #d7a5a5" : "3px solid rgba(179, 0, 0, 0.685)",

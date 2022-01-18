@@ -1,0 +1,4 @@
+export type SagaType = {
+  USER_CREATE_GAME: "USER_CREATE_GAME";
+  USER_JOIN_GAME: "USER_JOIN_GAME";
+};

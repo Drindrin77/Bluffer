@@ -2,21 +2,23 @@ import { ReloadOutlined } from "@ant-design/icons";
 import { Avatar, Col, Row, Typography } from "antd";
 import * as React from "react";
 import { useHistory } from "react-router-dom";
-import { PostGameActions } from "../../actions/PostGameActions";
-import { SocketContext } from "../../context/socket";
-import { StartButton } from "./StartButton";
-import "./Welcome.css";
+import { PostGameActions } from "../../../redux-saga/actions/PostGameActions";
+import { SocketContext } from "../../../context/socket";
+import { StartButton } from "../../../components/StyledButton.tsx";
 const { Title } = Typography;
 
 export const UserCreation = (props) => {
   const [userName, setUserName] = React.useState("");
   const socket = React.useContext(SocketContext);
   const history = useHistory();
-  async function createGame() {
-    if (userName !== "" && socket) {
-      const result = await PostGameActions.createGame(userName, socket.id);
-      if (result) {
-        history.push("/lobby");
+
+  async function handleJoinGame() {
+    if (userName !== "") {
+      try {
+        const idRoomSocket = await PostGameActions.createGame(userName, socket.id);
+        history.push("/lobby/" + idRoomSocket);
+      } catch {
+        console.error("error creation user");
       }
     }
   }
@@ -44,7 +46,7 @@ export const UserCreation = (props) => {
             onChange={(event) => setUserName(event.target.value)}
           />
 
-          <StartButton isDisabled={userName === ""} onClick={() => createGame()} />
+          <StartButton isDisabled={userName === ""} handleJoinGame={() => handleJoinGame()} />
         </Col>
       </Row>
     </Col>

@@ -1,11 +1,11 @@
 import { Row } from "antd";
 import * as React from "react";
 import { BlufferFooter } from "../../components/Footer";
-import { TitleGame } from "../../components/TitleGame/TitleGame";
+import { TitleGame } from "../../components/TitleGame";
 import { BottomDescription } from "./BottomDescription";
 import { GameExplaination } from "./GameExplaination";
-import { UserCreation } from "./UserCreation";
-import "./Welcome.css";
+import { UserCreation } from "./UserForm";
+import "./index.css";
 
 export const Welcome = (props) => {
   return (

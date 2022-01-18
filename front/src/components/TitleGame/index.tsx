@@ -1,6 +1,6 @@
 import { Button, Carousel, Col, Input, Row, Typography, Avatar } from "antd";
 import * as React from "react";
-import "./TitleGame.css";
+import "./index.css";
 const { Title } = Typography;
 
 interface TitleGameProps {

@@ -1,15 +1,15 @@
 import { Tooltip } from "antd";
 import * as React from "react";
-import "./StartButton.css";
+import "./index.css";
 
 interface StartButtonProps {
   isDisabled: boolean;
-  onClick: () => void;
+  handleJoinGame: () => void;
 }
 export const StartButton = (props: StartButtonProps) => {
-  const { isDisabled, onClick } = props;
+  const { isDisabled, handleJoinGame } = props;
   return (
-    <div className="container" onClick={onClick}>
+    <div className="container" onClick={handleJoinGame}>
       {isDisabled ? (
         <Tooltip placement="bottom" title="Choisis d'abord un pseudo !">
           <div className="disabled">C'est parti !</div>

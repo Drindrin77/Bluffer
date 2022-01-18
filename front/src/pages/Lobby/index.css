@@ -13,7 +13,7 @@
   border-radius: 10px;
   margin: 10px;
   align-items: center;
-  background: linear-gradient(-30deg, rgba(138, 0, 0, 0.527) 30%, #520101 70%);
+  background-color: #8a0d16;
   box-shadow: rgba(0, 0, 0, 0.534) 0px 5px 15px;
 }
 #mainContent {

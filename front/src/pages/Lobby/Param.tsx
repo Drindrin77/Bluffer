@@ -1,14 +1,23 @@
 import { LinkOutlined } from "@ant-design/icons";
 import { Button, Col, InputNumber, Row, Select, Typography } from "antd";
 import * as React from "react";
-import "./Lobby.css";
-const { Title } = Typography;
+
 const { Option } = Select;
 
 const nbMaxPlayer = 10;
 const selectPlayersNb = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-export const Param = (props) => {
+interface ParamProps {
+  invitLink: string;
+}
+
+export const Param = (props: ParamProps) => {
+  const { invitLink } = props;
+
+  const handleInvitLink = () => {
+    console.log(invitLink);
+  };
+
   return (
     <React.Fragment>
       <Col span={8} style={{ marginLeft: 10 }}>
@@ -18,7 +27,7 @@ export const Param = (props) => {
               Paramètres de la partie
             </Row>
 
-            <div id="btnLink">
+            <div id="btnLink" onClick={handleInvitLink}>
               <LinkOutlined style={{ marginRight: 20, fontSize: 20 }} />
               Inviter des amis
             </div>
@@ -32,7 +41,11 @@ export const Param = (props) => {
                 defaultValue="10"
               >
                 {selectPlayersNb.map((nb) => {
-                  return <Option value={nb}>{nb}</Option>;
+                  return (
+                    <Option value={nb} key={nb}>
+                      {nb}
+                    </Option>
+                  );
                 })}
               </Select>
             </div>
