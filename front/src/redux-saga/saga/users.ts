@@ -1,8 +1,8 @@
-import { all, call, put, takeEvery } from "redux-saga/effects";
-import { UserAPI } from "../../../api/UserAPI";
-import { setAxiosToken } from "../../../config";
-import { SagaType } from "../../../types/SagaType";
-import { createUserResponse } from "../../actions/UsersActions";
+import { all, call, put, takeLatest } from "redux-saga/effects";
+import { UserAPI } from "../../api/UserAPI";
+import { setAxiosToken } from "../../config";
+import { SagaType } from "../../types/SagaType";
+import { createUserResponse } from "../actions/UsersActions";
 
 /*
     const user = await UserAPI.createUser(userName, socketId);
@@ -14,15 +14,14 @@ import { createUserResponse } from "../../actions/UsersActions";
     */
 function* createUserSaga(action) {
   try {
-    console.log(action);
-
-    const response = yield UserAPI.createUser(action.payload.userName, action.payload.socketId);
+    const response = yield call(UserAPI.createUser, action.payload.userName, action.payload.socketId);
     const token = response.headers.authorization;
     localStorage.setItem("token", token);
     setAxiosToken(token);
+
     yield put(
       createUserResponse({
-        user: response.user,
+        user: response.data,
       })
     );
   } catch (e) {
@@ -35,7 +34,7 @@ function* createUserSaga(action) {
 }
 
 function* usersSaga() {
-  yield all([takeEvery(SagaType.CREATE_USER_REQUEST, createUserSaga)]);
+  yield all([takeLatest(SagaType.CREATE_USER_REQUEST, createUserSaga)]);
 }
 
 export default usersSaga;

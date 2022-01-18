@@ -9,8 +9,8 @@ import { Provider } from "react-redux";
 
 function App() {
   return (
-    <SocketContext.Provider value={socket}>
-      <Provider store={store}>
+    <Provider store={store}>
+      <SocketContext.Provider value={socket}>
         <Switch>
           <Route path="/lobby/:idRoomSocket">
             <Lobby />
@@ -19,8 +19,8 @@ function App() {
             <Welcome />
           </Route>
         </Switch>
-      </Provider>
-    </SocketContext.Provider>
+      </SocketContext.Provider>
+    </Provider>
   );
 }
 

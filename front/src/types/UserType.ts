@@ -1,11 +1,12 @@
 export type User = {
-  idUser: number;
-  userName: string;
+  id: number;
+  username: string;
+  socketId: string;
 };
 
 // REDUCERS
 
-interface UserState {
+export interface UserState {
   pending: boolean;
   user: User;
   error: any;
@@ -13,6 +14,6 @@ interface UserState {
 
 export const initialUserState: UserState = {
   pending: false,
-  user: null,
+  user: undefined,
   error: null,
 };

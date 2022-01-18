@@ -1,7 +1,7 @@
 import { combineReducers } from "redux";
 import userReducer from "./users";
 const rootReducer = combineReducers({
-  user: userReducer,
+  currentUser: userReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

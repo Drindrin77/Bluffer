@@ -1,5 +1,4 @@
 import { SagaType } from "../../types/SagaType";
-import { User } from "../../types/UserType";
 
 export type UsersActions = {
   type: string;
