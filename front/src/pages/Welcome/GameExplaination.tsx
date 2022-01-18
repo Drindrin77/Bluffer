@@ -1,6 +1,6 @@
 import { Col, Row, Typography } from "antd";
 import * as React from "react";
-import { rules } from "../../Instruction";
+import { rules } from "../../types/GameType";
 import "./index.css";
 
 const { Title } = Typography;

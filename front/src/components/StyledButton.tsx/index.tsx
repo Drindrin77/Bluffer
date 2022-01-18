@@ -2,11 +2,11 @@ import { Tooltip } from "antd";
 import * as React from "react";
 import "./index.css";
 
-interface StartButtonProps {
+interface StyledButtonProps {
   isDisabled: boolean;
   handleJoinGame: () => void;
 }
-export const StartButton = (props: StartButtonProps) => {
+export const StyledButton = (props: StyledButtonProps) => {
   const { isDisabled, handleJoinGame } = props;
   return (
     <div className="container" onClick={handleJoinGame}>

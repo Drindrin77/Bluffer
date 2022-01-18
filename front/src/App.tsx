@@ -1,28 +1,25 @@
-import * as React from "react";
-import { Welcome } from "./pages/Welcome";
 import "antd/dist/antd.css";
-import { Switch, Route, Link } from "react-router-dom";
+import * as React from "react";
+import { Route, Switch } from "react-router-dom";
+import { socket, SocketContext } from "./socket";
 import { Lobby } from "./pages/Lobby";
-import { socket, SocketContext } from "./context/socket";
-import { createStore, applyMiddleware } from "redux";
-import createSagaMiddleware from "redux-saga";
-const sagaMiddleware = createSagaMiddleware();
-// const store = createStore(
-//   reducer,
-//   applyMiddleware(sagaMiddleware)
-// )
+import { Welcome } from "./pages/Welcome";
+import store from "./redux-saga/store";
+import { Provider } from "react-redux";
 
 function App() {
   return (
     <SocketContext.Provider value={socket}>
-      <Switch>
-        <Route path="/lobby/:idRoomSocket">
-          <Lobby />
-        </Route>
-        <Route exact path="/">
-          <Welcome />
-        </Route>
-      </Switch>
+      <Provider store={store}>
+        <Switch>
+          <Route path="/lobby/:idRoomSocket">
+            <Lobby />
+          </Route>
+          <Route exact path="/">
+            <Welcome />
+          </Route>
+        </Switch>
+      </Provider>
     </SocketContext.Provider>
   );
 }
