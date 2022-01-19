@@ -5,6 +5,10 @@ module.exports = async (server) => {
     cors: { origin: "*" },
   });
 
+  io.on("connect", () => {
+    console.log("yey");
+  });
+
   io.services = {
     userJoinRoom: (user, idRoomSocket) => {
       try {
