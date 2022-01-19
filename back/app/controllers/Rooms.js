@@ -23,7 +23,7 @@ module.exports = (app) => {
         const socket = socketHandler.sockets.sockets.get(socketId);
 
         socket.join(idRoomSocket);
-        res.status(201).send({ room });
+        res.status(201).send(room);
       } catch (e) {
         return next(e);
       }
