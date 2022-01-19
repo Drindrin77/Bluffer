@@ -1,7 +1,5 @@
-import { SagaType } from "../../types/SagaType";
-import { initialUserState } from "../../types/UserType";
+import { SagaType, UserState, initialUserState } from "../../types/SagaType";
 import { UsersActions } from "../actions/UsersActions";
-import { UserState } from "../../types/UserType";
 
 export default (state = initialUserState, action: UsersActions): UserState => {
   switch (action.type) {

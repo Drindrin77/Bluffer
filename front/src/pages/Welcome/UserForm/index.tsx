@@ -3,26 +3,40 @@ import { Avatar, Col, Row, Typography } from "antd";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { StyledButton } from "../../../components/StyledButton.tsx";
+import { createRoomRequest } from "../../../redux-saga/actions/RoomsActions";
 import { createUserRequest } from "../../../redux-saga/actions/UsersActions";
 import { RootState } from "../../../redux-saga/reducers";
 import { SocketContext } from "../../../socket";
+import { useHistory } from "react-router-dom";
+import { ENDPOINT } from "../../../config";
+
 const { Title } = Typography;
 
 export const UserCreation = (props) => {
   const [userName, setUserName] = React.useState("");
   const dispatch = useDispatch();
-  const { pending, user, error } = useSelector((state: RootState) => state.currentUser);
+  const { user } = useSelector((state: RootState) => state.currentUser);
+  const { pending, room, error } = useSelector((state: RootState) => state.room);
+  const history = useHistory();
+
   const socket = React.useContext(SocketContext);
 
   function handleJoinGame() {
-    if (userName !== "") {
-      dispatch(createUserRequest(userName, socket.id));
-    }
+    dispatch(createUserRequest(userName, socket.id));
   }
 
   React.useEffect(() => {
-    if (user?.id) {
-      console.log("dinbish");
+    if (room) {
+      socket.connect();
+      console.log(room.idRoomSocket);
+
+      history.push("/lobby/" + room.idRoomSocket);
+    }
+  }, [room]);
+
+  React.useEffect(() => {
+    if (user) {
+      dispatch(createRoomRequest());
     }
   }, [user]);
 

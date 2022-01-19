@@ -4,14 +4,6 @@ import { setAxiosToken } from "../../config";
 import { SagaType } from "../../types/SagaType";
 import { createUserResponse } from "../actions/UsersActions";
 
-/*
-    const user = await UserAPI.createUser(userName, socketId);
-    const token = user.headers.authorization;
-    localStorage.setItem("token", token);
-    setAxiosToken(token);
-    const roomResult = await RoomAPI.createRoom();
-    return roomResult.data.room.idRoomSocket;
-    */
 function* createUserSaga(action) {
   try {
     const response = yield call(UserAPI.createUser, action.payload.userName, action.payload.socketId);
