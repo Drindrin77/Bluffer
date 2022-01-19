@@ -5,7 +5,27 @@ module.exports = async (server) => {
     cors: { origin: "*" },
   });
 
-  io.services = {};
-
+  io.services = {
+    userJoinRoom: (user, idRoomSocket) => {
+      try {
+        const socket = socketHandler.sockets.sockets.get(user.socketId);
+        socket.join(idRoomSocket);
+        io.to(idRoomSocket).emit("userJoinedRoom", {
+          user,
+        });
+      } catch (e) {
+        throw new Error("Error with socket services userJoinRoom|500");
+      }
+    },
+    updateConfigRoom: (room) => {
+      try {
+        io.to(room.idRoomSocket).emit("updateRoomConfig", {
+          room,
+        });
+      } catch (e) {
+        throw new Error("Error with socket services updateConfigRoom|500");
+      }
+    },
+  };
   return io;
 };

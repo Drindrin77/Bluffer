@@ -35,6 +35,10 @@ module.exports = (app) => {
           ...req.body,
         });
         await room.save({ fields: ["nbPlayerMax", "maxScore"] });
+
+        const socketHandler = app.get("socketHandler");
+        socketHandler.updateConfigRoom(room);
+
         res.status(200).send(room);
       } catch (e) {
         return next(e);
