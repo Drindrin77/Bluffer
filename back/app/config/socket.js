@@ -12,12 +12,11 @@ module.exports = async (server) => {
   io.services = {
     userJoinRoom: (user, idRoomSocket) => {
       try {
-        const socket = socketHandler.sockets.sockets.get(user.socketId);
-        socket.join(idRoomSocket);
         io.to(idRoomSocket).emit("userJoinedRoom", {
           user,
         });
       } catch (e) {
+        console.log(e);
         throw new Error("Error with socket services userJoinRoom|500");
       }
     },

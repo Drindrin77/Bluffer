@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const {
   sequelize: {
-    models: { User, Room, UserRooms },
+    models: { User, Room, UserRoom },
   },
 } = require("../../models");
 module.exports = {
@@ -47,12 +47,20 @@ module.exports = {
   },
   canJoinTeam: async (req, res, next) => {
     try {
-      const isAlreadyInTheTeam = await UserRooms.findOne({
+      const isAlreadyInTheTeam = await User.findOne({
         where: {
-          userId: req.currentUser.id,
-          roomId: req.body.roomId,
+          id: req.currentUser.id,
         },
+        include: [
+          {
+            model: Room,
+            where: {
+              idRoomSocket: req.body.idRoomSocket,
+            },
+          },
+        ],
       });
+
       if (isAlreadyInTheTeam) {
         throw new Error("Unauthorized|401");
       }

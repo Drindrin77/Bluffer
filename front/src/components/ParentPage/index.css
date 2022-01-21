@@ -1,0 +1,21 @@
+@media (min-width: 1200px) {
+  #welcomePage {
+    height: 100%;
+  }
+}
+#welcomePage {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(#a0004b, rgb(88 0 9));
+  margin: 0;
+  height: 100vh;
+  -webkit-overflow-y: hidden;
+  -moz-overflow-y: hidden;
+  -o-overflow-y: hidden;
+  overflow-y: hidden;
+  -webkit-animation: fadeIn 1 1s ease-out;
+  -moz-animation: fadeIn 1 1s ease-out;
+  -o-animation: fadeIn 1 1s ease-out;
+  animation: fadeIn 1 1s ease-out;
+}

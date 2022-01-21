@@ -10,18 +10,13 @@ export const createRoomRequest = () => ({
   type: SagaType.CREATE_ROOM_REQUEST,
 });
 
-export const createRoomResponse = (payload) => ({
-  type: SagaType.CREATE_ROOM_RESPONSE,
-  payload,
-});
-
 export const updateRoomParamRequest = (payload) => ({
   type: SagaType.UPDATE_ROOM_PARAM_REQUEST,
   payload,
 });
 
-export const updateRoomParamResponse = (payload) => ({
-  type: SagaType.UPDATE_ROOM_PARAM_RESPONSE,
+export const updateRoom = (payload) => ({
+  type: SagaType.UPDATE_ROOM,
   payload,
 });
 
@@ -30,7 +25,7 @@ export const getRoomRequest = (payload) => ({
   payload,
 });
 
-export const getRoomResponse = (payload) => ({
-  type: SagaType.GET_ROOM_RESPONSE,
+export const joinRoomRequest = (payload) => ({
+  type: SagaType.JOIN_ROOM_REQUEST,
   payload,
 });

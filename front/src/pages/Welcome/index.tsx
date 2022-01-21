@@ -6,15 +6,19 @@ import { BottomDescription } from "./BottomDescription";
 import { GameExplaination } from "./GameExplaination";
 import { UserCreation } from "./UserForm";
 import "./index.css";
+import { useParams } from "react-router-dom";
+import { ParentPage } from "../../components/ParentPage";
 
 export const Welcome = (props) => {
+  const { id } = useParams();
+
   return (
-    <div id="welcomePage">
+    <ParentPage>
       <div id="welcomeContent">
         <TitleGame />
 
         <Row justify="center" style={{ marginTop: 100 }}>
-          <UserCreation />
+          <UserCreation idRoomSocket={id} />
           <GameExplaination />
         </Row>
 
@@ -22,6 +26,6 @@ export const Welcome = (props) => {
       </div>
 
       <BlufferFooter />
-    </div>
+    </ParentPage>
   );
 };

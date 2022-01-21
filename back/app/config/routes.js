@@ -16,10 +16,7 @@ module.exports = async function (app) {
 
   routing.route("/users").get(controlleurs.Users.find);
 
-  routing
-    .route("/userRooms")
-    .get(controlleurs.UserRooms.find)
-    .post([checkToken, canJoinTeam], controlleurs.UserRooms.join);
+  routing.route("/userRooms").post([checkToken, canJoinTeam], controlleurs.UserRooms.join);
 
   app.use("/api/v1", routing);
 };

@@ -11,8 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux-saga/reducers";
 import { invitLink } from "../../types/RoomType";
 import { useHistory } from "react-router-dom";
-import { getRoomRequest } from "../../redux-saga/actions/RoomsActions";
+import { getRoomRequest, updateRoom } from "../../redux-saga/actions/RoomsActions";
 import rooms from "../../redux-saga/reducers/rooms";
+import { socket } from "../../socket";
+import { ParentPage } from "../../components/ParentPage";
 
 export const Lobby = (props) => {
   const { user } = useSelector((state: RootState) => state.currentUser);
@@ -21,24 +23,38 @@ export const Lobby = (props) => {
   const dispatch = useDispatch();
 
   React.useEffect(() => {
+    if (socket) {
+      socket.on("userJoinedRoom", (data) => {
+        dispatch(getRoomRequest({ idRoom: room.id }));
+      });
+      socket.on("updateRoomConfig", (data) => {
+        //Avoid second call
+        if (!isAdmin) {
+          dispatch(getRoomRequest({ idRoom: room.id }));
+        }
+      });
+    }
+  }, [socket]);
+
+  React.useEffect(() => {
     if (room) {
       dispatch(getRoomRequest({ idRoom: room.id }));
     }
   }, []);
 
   return room && user ? (
-    <div id="wrapper">
+    <ParentPage>
       <TitleGame onlyTitle />
       <div id="mainContent">
         <Row justify="center" style={{ height: "100%" }}>
-          <PlayerList players={room.users} idAdmin={room.idAdmin} nbPlayerMax={room.nbPlayerMax} idUser={user.id} />
+          <PlayerList room={room} idUser={user.id} />
           <Param nbPlayer={room.users.length} room={room} isAdmin={isAdmin} />
         </Row>
       </div>
       <div>
         <BlufferFooter />
       </div>
-    </div>
+    </ParentPage>
   ) : (
     <>pas bein</>
   );

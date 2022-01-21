@@ -49,11 +49,12 @@ export const Param = (props: ParamProps) => {
               <Select
                 bordered={false}
                 size="large"
-                style={{ backgroundColor: "rgb(138 13 22)", marginTop: 10, color: "white" }}
+                disabled={!isAdmin}
+                style={{ backgroundColor: "rgb(255 255 255 / 16%)", marginTop: 10, color: "white" }}
                 onChange={(value) => {
                   handleChangeParam({ nbPlayerMax: value });
                 }}
-                defaultValue={room.nbPlayerMax}
+                value={room.nbPlayerMax}
               >
                 {selectPlayersNb.map((nb) => {
                   return (
@@ -69,14 +70,15 @@ export const Param = (props: ParamProps) => {
               Nombre de points gagnant
               <InputNumber
                 min={12}
+                disabled={!isAdmin}
                 max={20}
                 onChange={(value) => {
                   handleChangeParam({ maxScore: value });
                 }}
                 size="large"
-                defaultValue={room.maxScore}
+                value={room.maxScore}
                 bordered={false}
-                style={{ backgroundColor: "rgb(138 13 22)", marginTop: 10, color: "white", width: "100%" }}
+                style={{ backgroundColor: "rgb(255 255 255 / 16%)", marginTop: 10, color: "white", width: "100%" }}
               />
             </div>
           </div>
@@ -88,7 +90,7 @@ export const Param = (props: ParamProps) => {
             <span></span>
             <span></span>
             <span></span>
-            Lancer la partie
+            {isAdmin ? "Lancer la partie" : "En attente du hôte de la partie"}
           </div>
         </div>
       </Col>

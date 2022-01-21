@@ -8,19 +8,6 @@ export default (state = initialRoomState, action: RoomsActions): RoomState => {
         ...state,
         pending: true,
       };
-    case SagaType.CREATE_ROOM_RESPONSE:
-      return {
-        pending: false,
-        room: action.payload.room,
-        error: action.payload.error,
-      };
-
-    case SagaType.UPDATE_ROOM_PARAM_RESPONSE:
-      return {
-        pending: false,
-        room: action.payload.room,
-        error: action.payload.error,
-      };
 
     case SagaType.UPDATE_ROOM_PARAM_REQUEST:
       return {
@@ -33,7 +20,14 @@ export default (state = initialRoomState, action: RoomsActions): RoomState => {
         ...state,
         pending: true,
       };
-    case SagaType.GET_ROOM_RESPONSE:
+
+    case SagaType.JOIN_ROOM_REQUEST:
+      return {
+        ...state,
+        pending: true,
+      };
+
+    case SagaType.UPDATE_ROOM:
       return {
         pending: false,
         room: action.payload.room,

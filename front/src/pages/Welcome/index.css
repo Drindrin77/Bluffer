@@ -20,24 +20,17 @@
     margin-left: 0px !important;
   }
 }
-
-#gameExplainationCol {
-  border: 3px solid #690b12;
+#userCreationCol {
+  background-color: rgb(255 255 255 / 12%);
   padding: 20px;
-  margin-left: 10px;
   border-radius: 10px;
 }
 
-@media (min-width: 1200px) {
-  #welcomePage {
-    height: 100%;
-  }
-}
-#welcomePage {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(to right, #7d0d15, #8c0e17);
+#gameExplainationCol {
+  background-color: rgb(255 255 255 / 5%);
+  padding: 20px;
+  margin-left: 10px;
+  border-radius: 10px;
 }
 
 /* CSS */

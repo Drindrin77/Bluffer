@@ -15,7 +15,7 @@ function App() {
           <Route path="/lobby">
             <Lobby />
           </Route>
-          <Route exact path="/">
+          <Route path={["/join/:id", "/"]}>
             <Welcome />
           </Route>
         </Switch>

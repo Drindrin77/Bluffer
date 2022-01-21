@@ -1,20 +1,20 @@
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { RoomAPI } from "../../api/RoomAPI";
 import { SagaType } from "../../types/SagaType";
-import { createRoomResponse, getRoomResponse, updateRoomParamResponse } from "../actions/RoomsActions";
+import { updateRoom } from "../actions/RoomsActions";
 
 function* createRoomSaga(action) {
   try {
     const response = yield call(RoomAPI.createRoom);
 
     yield put(
-      createRoomResponse({
+      updateRoom({
         room: response.data,
       })
     );
   } catch (e) {
     yield put(
-      createRoomResponse({
+      updateRoom({
         error: e.message,
       })
     );
@@ -29,13 +29,13 @@ function* updateRoomParamSaga(action) {
     const response = yield call(RoomAPI.updateRoomParam, idRoom, param);
 
     yield put(
-      updateRoomParamResponse({
+      updateRoom({
         room: response.data,
       })
     );
   } catch (e) {
     yield put(
-      updateRoomParamResponse({
+      updateRoom({
         error: e.message,
       })
     );
@@ -48,13 +48,32 @@ function* getRoomSaga(action) {
     const response = yield call(RoomAPI.getRoom, idRoom);
 
     yield put(
-      getRoomResponse({
+      updateRoom({
         room: response.data,
       })
     );
   } catch (e) {
     yield put(
-      getRoomResponse({
+      updateRoom({
+        error: e.message,
+      })
+    );
+  }
+}
+
+function* joinRoomSaga(action) {
+  try {
+    const idRoomSocket = action.payload;
+    const response = yield call(RoomAPI.joinRoom, idRoomSocket);
+
+    yield put(
+      updateRoom({
+        room: response.data,
+      })
+    );
+  } catch (e) {
+    yield put(
+      updateRoom({
         error: e.message,
       })
     );
@@ -66,6 +85,7 @@ function* roomsSaga() {
     takeLatest(SagaType.CREATE_ROOM_REQUEST, createRoomSaga),
     takeLatest(SagaType.UPDATE_ROOM_PARAM_REQUEST, updateRoomParamSaga),
     takeLatest(SagaType.GET_ROOM_REQUEST, getRoomSaga),
+    takeLatest(SagaType.JOIN_ROOM_REQUEST, joinRoomSaga),
   ]);
 }
 

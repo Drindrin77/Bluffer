@@ -1,4 +1,4 @@
-import { ENDPOINT } from "../config";
+import { ENDPOINTFRONT } from "../config";
 import { User } from "./UserType";
 
 export type Room = {
@@ -7,7 +7,7 @@ export type Room = {
   idRoomSocket: string;
   maxScore: number;
   nbPlayerMax: number;
-  users?: User[];
+  users: User[];
 };
 
-export const invitLink = (idRoomSocket: string) => ENDPOINT + "/join/" + idRoomSocket;
+export const invitLink = (idRoomSocket: string) => ENDPOINTFRONT + "/join/" + idRoomSocket;

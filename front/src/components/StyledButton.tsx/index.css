@@ -1,24 +1,24 @@
 .activated {
   padding: 5px;
-  background-color: rgba(218, 120, 120, 0.877);
+  background-color: rgb(0, 128, 255);
   text-align: center;
   border-radius: 6px;
   font-size: 25px;
   cursor: pointer;
-  transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .disabled {
   padding: 5px;
-  background-color: rgba(56, 56, 56, 0.774);
+  background-color: rgb(108 105 105 / 58%);
   text-align: center;
   border-radius: 6px;
   font-size: 25px;
   cursor: not-allowed;
-  transition: all 0.6s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
 .activated:hover {
-  background-color: rgba(202, 63, 63, 0.877);
+  background-color: rgb(36 144 255);
   transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }

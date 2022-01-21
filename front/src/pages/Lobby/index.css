@@ -13,7 +13,7 @@
   border-radius: 10px;
   margin: 10px;
   align-items: center;
-  background-color: #8a0d16;
+  background-color: #83002a85;
   box-shadow: rgba(0, 0, 0, 0.534) 0px 5px 15px;
 }
 
@@ -46,11 +46,36 @@
   margin-bottom: 15px;
 }
 
-#nbPlayer {
-  text-align: center;
-  font-size: 30px;
+.progressContainer {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  background-color: #44070b;
   margin-bottom: 20px;
   box-shadow: rgba(0, 0, 0, 0.56) 0px 10px 20px 4px;
+}
+.progressBar {
+  background: linear-gradient(
+    to right,
+    #cb0000,
+    #e19900f0
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  height: 100%;
+  position: absolute;
+  line-height: inherit;
+  transition: width 1s;
+}
+
+.nbPlayers {
+  position: absolute;
+  font-size: 25px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  text-align: center;
 }
 
 .sc4::-webkit-scrollbar {
@@ -59,26 +84,11 @@
 }
 .sc4::-webkit-scrollbar-track {
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.sc4::-webkit-scrollbar-thumb {
-  background-color: #a54d00;
-  background-image: -webkit-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.3) 20%,
-    transparent 20%,
-    transparent 40%,
-    rgba(255, 255, 255, 0.3) 40%,
-    rgba(255, 255, 255, 0.3) 60%,
-    transparent 60%,
-    transparent 80%,
-    rgba(255, 255, 255, 0.3) 80%
-  );
-  border-radius: 10px;
+  background-color: rgba(3, 0, 0, 0.486);
 }
 
 #playersContainer {
-  background-color: #690b12;
+  background-color: #ffffff1a;
   border-radius: 10px;
 }
 
@@ -271,7 +281,7 @@
 
 #parameterContainer {
   display: flex;
-  background-color: #61000686;
+  background-color: #1a080826;
   flex: 1;
   border-radius: 20px;
   flex-direction: column;

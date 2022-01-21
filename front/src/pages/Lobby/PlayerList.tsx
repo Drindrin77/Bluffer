@@ -1,36 +1,34 @@
 import { CrownFilled } from "@ant-design/icons";
 import { Avatar, Col } from "antd";
 import * as React from "react";
+import { Room } from "../../types/RoomType";
 import { User } from "../../types/UserType";
 
 interface PlayerListProps {
   idUser: number;
-  idAdmin: number;
-  nbPlayerMax: number;
-  players: User[];
+  room: Room;
 }
 
 export const PlayerList = (props: PlayerListProps) => {
-  const { idAdmin, nbPlayerMax, idUser, players } = props;
-  const percentageNbPlayer = (players.length * 100) / nbPlayerMax;
-  const isAdmin = idUser == idAdmin;
+  const { idUser, room } = props;
+  const percentageNbPlayer = (room.users.length * 100) / room.nbPlayerMax;
+  const isAdmin = idUser == room.idAdmin;
   const fillPercentage = 100 - percentageNbPlayer;
 
   return (
     <React.Fragment>
       <Col span={8} id="playersContainer">
         <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
-          <div
-            id="nbPlayer"
-            style={{
-              background: `linear-gradient(to right, #b3000cb0 ${percentageNbPlayer}%, #44070b ${fillPercentage}%)`,
-            }}
-          >
-            Joueurs {players.length} / {nbPlayerMax}
+          <div className="progressContainer">
+            <span className="nbPlayers">
+              Joueurs {room.users.length} / {room.nbPlayerMax}
+            </span>
+            <div className="progressBar" style={{ width: `${percentageNbPlayer}%` }}></div>
           </div>
+
           <div style={{ flex: 1, overflow: "auto" }} className="sc4">
-            {players.map((player, index) => {
-              return <Player key={index} player={player} isAdmin={isAdmin} idAdmin={idAdmin} idUser={idUser} />;
+            {room.users.map((player, index) => {
+              return <Player key={index} player={player} isAdmin={isAdmin} idAdmin={room.idAdmin} idUser={idUser} />;
             })}
           </div>
         </div>

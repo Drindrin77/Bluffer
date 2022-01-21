@@ -4,7 +4,7 @@ export const BlufferFooter = (props) => {
   return (
     <div
       style={{
-        backgroundColor: "#690b12",
+        backgroundColor: "black",
         paddingTop: 10,
         paddingBottom: 10,
         marginTop: 10,

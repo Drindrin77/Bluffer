@@ -10,7 +10,11 @@ export namespace RoomAPI {
     return securedApi.put(`/rooms/${idRoom}`, param);
   }
 
-  export async function getRoom(idRoom): Promise<any> {
+  export async function getRoom(idRoom): Promise<Room> {
     return securedApi.get(`/rooms/${idRoom}`);
+  }
+
+  export async function joinRoom(idRoomSocket): Promise<Room> {
+    return securedApi.post("/userRooms", { idRoomSocket });
   }
 }
