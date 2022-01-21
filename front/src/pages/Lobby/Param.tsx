@@ -1,22 +1,33 @@
 import { LinkOutlined } from "@ant-design/icons";
-import { Button, Col, InputNumber, Row, Select, Typography } from "antd";
+import { Button, Col, InputNumber, Popover, Row, Select, Tooltip, Typography } from "antd";
 import * as React from "react";
+import { useDispatch } from "react-redux";
+import { updateRoomParamRequest } from "../../redux-saga/actions/RoomsActions";
+import { invitLink, Room } from "../../types/RoomType";
 
 const { Option } = Select;
 
-const nbMaxPlayer = 10;
 const selectPlayersNb = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 interface ParamProps {
-  invitLink: string;
+  isAdmin: boolean;
+  nbPlayer: number;
+  room: Room;
 }
 
 export const Param = (props: ParamProps) => {
-  const { invitLink } = props;
+  const { nbPlayer, isAdmin, room } = props;
+  const dispatch = useDispatch();
 
   const handleInvitLink = () => {
-    console.log(invitLink);
+    navigator.clipboard.writeText(invitLink(room.idRoomSocket));
   };
+
+  const handleChangeParam = (param) => {
+    dispatch(updateRoomParamRequest({ idRoom: room.id, param }));
+  };
+
+  const handleLauncherGame = () => {};
 
   return (
     <React.Fragment>
@@ -27,22 +38,26 @@ export const Param = (props: ParamProps) => {
               Paramètres de la partie
             </Row>
 
-            <div id="btnLink" onClick={handleInvitLink}>
-              <LinkOutlined style={{ marginRight: 20, fontSize: 20 }} />
-              Inviter des amis
-            </div>
-
+            <Tooltip trigger="click" title={<div>C'est copié !</div>} color="green" mouseLeaveDelay={0.1}>
+              <div id="btnLink" onClick={handleInvitLink}>
+                <LinkOutlined style={{ marginRight: 20, fontSize: 20 }} />
+                Inviter des amis
+              </div>
+            </Tooltip>
             <div style={{ display: "flex", flexDirection: "column", margin: 20 }}>
               <span style={{ marginTop: 20 }}>Nombre de joueurs max</span>
               <Select
                 bordered={false}
                 size="large"
                 style={{ backgroundColor: "rgb(138 13 22)", marginTop: 10, color: "white" }}
-                defaultValue="10"
+                onChange={(value) => {
+                  handleChangeParam({ nbPlayerMax: value });
+                }}
+                defaultValue={room.nbPlayerMax}
               >
                 {selectPlayersNb.map((nb) => {
                   return (
-                    <Option value={nb} key={nb}>
+                    <Option disabled={nb < nbPlayer} value={nb} key={nb}>
                       {nb}
                     </Option>
                   );
@@ -53,10 +68,13 @@ export const Param = (props: ParamProps) => {
             <div style={{ display: "flex", flexDirection: "column", margin: 20 }}>
               Nombre de points gagnant
               <InputNumber
-                min={1}
-                max={100}
+                min={12}
+                max={20}
+                onChange={(value) => {
+                  handleChangeParam({ maxScore: value });
+                }}
                 size="large"
-                defaultValue={12}
+                defaultValue={room.maxScore}
                 bordered={false}
                 style={{ backgroundColor: "rgb(138 13 22)", marginTop: 10, color: "white", width: "100%" }}
               />
@@ -65,13 +83,13 @@ export const Param = (props: ParamProps) => {
 
           {/* BUTTON LANCER LA PARTIE */}
 
-          <a href="#" className="animated-button1">
+          <div className="animated-button1">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
             Lancer la partie
-          </a>
+          </div>
         </div>
       </Col>
     </React.Fragment>

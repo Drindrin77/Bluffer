@@ -5,8 +5,8 @@ module.exports = async (server) => {
     cors: { origin: "*" },
   });
 
-  io.on("connect", () => {
-    console.log("yey");
+  io.on("connect", (socket) => {
+    socket.emit("connectionEstablished", "ok");
   });
 
   io.services = {

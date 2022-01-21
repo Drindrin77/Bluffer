@@ -6,6 +6,10 @@ export const SagaType = {
   CREATE_USER_RESPONSE: "CREATE_USER_RESPONSE",
   CREATE_ROOM_REQUEST: "CREATE_ROOM_REQUEST",
   CREATE_ROOM_RESPONSE: "CREATE_ROOM_RESPONSE",
+  UPDATE_ROOM_PARAM_REQUEST: "UPDATE_ROOM_PARAM_REQUEST",
+  UPDATE_ROOM_PARAM_RESPONSE: "UPDATE_ROOM_PARAM_RESPONSE",
+  GET_ROOM_REQUEST: "GET_ROOM_REQUEST",
+  GET_ROOM_RESPONSE: "GET_ROOM_RESPONSE",
 };
 
 // REDUCERS
@@ -31,5 +35,17 @@ export interface RoomState {
 export const initialRoomState: RoomState = {
   pending: false,
   room: null,
+  error: null,
+};
+
+export interface UsersState {
+  pending: boolean;
+  users: User[];
+  error: any;
+}
+
+export const initialUsersState: UsersState = {
+  pending: false,
+  users: [],
   error: null,
 };

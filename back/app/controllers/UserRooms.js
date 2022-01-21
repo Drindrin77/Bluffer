@@ -1,7 +1,7 @@
 const {
   Sequelize,
   sequelize: {
-    models: { Room, UserRoom },
+    models: { Room, UserRoom, User },
   },
 } = require("../models");
 
@@ -14,9 +14,7 @@ module.exports = (app) => {
         });
 
         if (!room) {
-          throw new Error(
-            `Room with idRoomSocket ${req.body.idRoomSocket} does not exist|404`
-          );
+          throw new Error(`Room with idRoomSocket ${req.body.idRoomSocket} does not exist|404`);
         }
 
         const userRoom = await UserRoom.create({
@@ -32,5 +30,6 @@ module.exports = (app) => {
         return next(e);
       }
     },
+    find: async (req, res, next) => {},
   };
 };

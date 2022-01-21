@@ -8,7 +8,6 @@ import { createUserRequest } from "../../../redux-saga/actions/UsersActions";
 import { RootState } from "../../../redux-saga/reducers";
 import { SocketContext } from "../../../socket";
 import { useHistory } from "react-router-dom";
-import { ENDPOINT } from "../../../config";
 
 const { Title } = Typography;
 
@@ -27,10 +26,7 @@ export const UserCreation = (props) => {
 
   React.useEffect(() => {
     if (room) {
-      socket.connect();
-      console.log(room.idRoomSocket);
-
-      history.push("/lobby/" + room.idRoomSocket);
+      history.push("/lobby/");
     }
   }, [room]);
 

@@ -3,7 +3,6 @@ const lodash = require("lodash");
 const name = path.basename(__filename, ".js");
 const displayName = name.charAt(0).toLocaleLowerCase() + name.slice(1);
 module.exports = async function (sequelize, DataTypes) {
-  const { Room } = sequelize.models;
   const User = sequelize.define(
     name,
     {

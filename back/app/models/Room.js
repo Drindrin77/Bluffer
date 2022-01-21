@@ -6,16 +6,10 @@ module.exports = async function (sequelize, DataTypes) {
   const Room = sequelize.define(
     name,
     {
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        allowNull: false,
-        primaryKey: true,
-      },
       nbPlayerMax: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        defaultValue: 2,
+        defaultValue: 10,
         validate: {
           min: 2,
           max: 10,

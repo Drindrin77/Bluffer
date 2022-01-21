@@ -26,6 +26,9 @@ module.exports = {
     }
   },
   isRoomsADM: async (req, res, next) => {
+    console.log("isrooms");
+    console.log(req.params);
+    console.log(req.currentUser);
     try {
       const room = await Room.findOne({
         where: {
@@ -34,9 +37,10 @@ module.exports = {
         },
       });
       if (!room) {
+        console.log("la");
         throw new Error("Unauthorized|401");
       }
-      return next(e);
+      return next();
     } catch (e) {
       return next(e);
     }
@@ -52,7 +56,7 @@ module.exports = {
       if (isAlreadyInTheTeam) {
         throw new Error("Unauthorized|401");
       }
-      return next(e);
+      return next();
     } catch (e) {
       return next(e);
     }

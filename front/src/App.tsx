@@ -12,7 +12,7 @@ function App() {
     <Provider store={store}>
       <SocketContext.Provider value={socket}>
         <Switch>
-          <Route path="/lobby/:idRoomSocket">
+          <Route path="/lobby">
             <Lobby />
           </Route>
           <Route exact path="/">

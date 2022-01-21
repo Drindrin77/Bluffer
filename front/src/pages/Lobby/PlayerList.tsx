@@ -1,20 +1,19 @@
 import { CrownFilled } from "@ant-design/icons";
 import { Avatar, Col } from "antd";
 import * as React from "react";
+import { User } from "../../types/UserType";
 
-const players = [
-  { userName: "Drindrin", image: "https:joeschmoe.io/api/v1/random", mine: true, admin: true },
-  { userName: "Nicouli", image: "https:joeschmoe.io/api/v1/random" },
-  { userName: "Nicouli", image: "https:joeschmoe.io/api/v1/random" },
-  { userName: "Nicouli", image: "https:joeschmoe.io/api/v1/random" },
-  { userName: "Alexis", image: "https:joeschmoe.io/api/v1/random" },
-  { userName: "Alexis", image: "https:joeschmoe.io/api/v1/random" },
-  { userName: "Dio", image: "https:joeschmoe.io/api/v1/random" },
-];
-const nbMaxPlayer = 10;
+interface PlayerListProps {
+  idUser: number;
+  idAdmin: number;
+  nbPlayerMax: number;
+  players: User[];
+}
 
-export const PlayerList = (props) => {
-  const percentageNbPlayer = (players.length * 100) / nbMaxPlayer;
+export const PlayerList = (props: PlayerListProps) => {
+  const { idAdmin, nbPlayerMax, idUser, players } = props;
+  const percentageNbPlayer = (players.length * 100) / nbPlayerMax;
+  const isAdmin = idUser == idAdmin;
   const fillPercentage = 100 - percentageNbPlayer;
 
   return (
@@ -27,28 +26,11 @@ export const PlayerList = (props) => {
               background: `linear-gradient(to right, #b3000cb0 ${percentageNbPlayer}%, #44070b ${fillPercentage}%)`,
             }}
           >
-            Joueurs {players.length} / {nbMaxPlayer}
+            Joueurs {players.length} / {nbPlayerMax}
           </div>
           <div style={{ flex: 1, overflow: "auto" }} className="sc4">
             {players.map((player, index) => {
-              return (
-                <div
-                  key={"player-" + index}
-                  className="playerContainer"
-                  style={{
-                    border: player.mine ? "3px solid #d7a5a5" : "3px solid rgba(179, 0, 0, 0.685)",
-                  }}
-                >
-                  <Player player={player} />
-                  {player.admin ? (
-                    <CrownFilled style={{ color: "yellow", fontSize: 40, marginRight: 20 }} />
-                  ) : (
-                    <button className="button-74" role="button">
-                      Ouste !
-                    </button>
-                  )}
-                </div>
-              );
+              return <Player key={index} player={player} isAdmin={isAdmin} idAdmin={idAdmin} idUser={idUser} />;
             })}
           </div>
         </div>
@@ -57,12 +39,28 @@ export const PlayerList = (props) => {
   );
 };
 
-const Player = (props) => {
-  const { player } = props;
+interface PlayerProps {
+  isAdmin: boolean;
+  idAdmin: number;
+  idUser: number;
+  player: User;
+}
+const Player = (props: PlayerProps) => {
+  const { player, isAdmin, idUser, idAdmin } = props;
   return (
-    <div style={{ padding: 10, width: "100%", color: "white", fontSize: 20 }}>
-      <Avatar size={64} src={player.image} />
-      {player.userName}
+    <div className={player.id == idUser ? "playerContainer isCurrentUser" : " playerContainer notCurrentUser"}>
+      <div className="avatarUsername">
+        <Avatar size={64} src={"https:joeschmoe.io/api/v1/random"} />
+        <span>{player.username}</span>
+      </div>
+
+      {player.id == idAdmin && <CrownFilled className="crownStyle" />}
+
+      {isAdmin && player.id !== idUser && (
+        <button className="button-74" role="button">
+          Ouste !
+        </button>
+      )}
     </div>
   );
 };
