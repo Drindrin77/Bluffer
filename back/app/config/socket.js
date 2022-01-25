@@ -29,6 +29,16 @@ module.exports = async (server) => {
         throw new Error("Error with socket services updateConfigRoom|500");
       }
     },
+    removeUserFromRoom: (userId, userSocketId, roomSocketId) => {
+      try {
+        const socket = io.sockets.sockets.get(userSocketId);
+        socket.leave(roomSocketId);
+        io.to(roomSocketId).emit("userLeftRoom", { userId });
+        socket.emit("getKicked", "You have been kicked");
+      } catch (e) {
+        throw new Error("Error with socket services removeUserFromRoom|500");
+      }
+    },
   };
   return io;
 };
