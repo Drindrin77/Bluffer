@@ -1,6 +1,7 @@
 import { CrownFilled } from "@ant-design/icons";
 import { Avatar, Col } from "antd";
 import * as React from "react";
+import { RoomAPI } from "../../api/RoomAPI";
 import { Room } from "../../types/RoomType";
 import { User } from "../../types/UserType";
 
@@ -13,7 +14,6 @@ export const PlayerList = (props: PlayerListProps) => {
   const { idUser, room } = props;
   const percentageNbPlayer = (room.users.length * 100) / room.nbPlayerMax;
   const isAdmin = idUser == room.idAdmin;
-  const fillPercentage = 100 - percentageNbPlayer;
 
   return (
     <React.Fragment>
@@ -21,14 +21,15 @@ export const PlayerList = (props: PlayerListProps) => {
         <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
           <div className="progressContainer">
             <span className="nbPlayers">
-              Joueurs {room.users.length} / {room.nbPlayerMax}
+              Joueurs <b style={{ fontSize: 30 }}>{room.users.length}</b>
+              <span style={{ fontSize: 20, color: "grey" }}>/{room.nbPlayerMax}</span>
             </span>
             <div className="progressBar" style={{ width: `${percentageNbPlayer}%` }}></div>
           </div>
 
           <div style={{ flex: 1, overflow: "auto" }} className="sc4">
             {room.users.map((player, index) => {
-              return <Player key={index} player={player} isAdmin={isAdmin} idAdmin={room.idAdmin} idUser={idUser} />;
+              return <Player key={index} player={player} isAdmin={isAdmin} room={room} idUser={idUser} />;
             })}
           </div>
         </div>
@@ -39,12 +40,22 @@ export const PlayerList = (props: PlayerListProps) => {
 
 interface PlayerProps {
   isAdmin: boolean;
-  idAdmin: number;
+  room: Room;
   idUser: number;
   player: User;
 }
 const Player = (props: PlayerProps) => {
-  const { player, isAdmin, idUser, idAdmin } = props;
+  const { player, isAdmin, idUser, room } = props;
+
+  const onKickPlayer = () => {
+    RoomAPI.kickPlayer(room.id, player.id)
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
   return (
     <div className={player.id == idUser ? "playerContainer isCurrentUser" : " playerContainer notCurrentUser"}>
       <div className="avatarUsername">
@@ -52,10 +63,10 @@ const Player = (props: PlayerProps) => {
         <span>{player.username}</span>
       </div>
 
-      {player.id == idAdmin && <CrownFilled className="crownStyle" />}
+      {player.id == room.idAdmin && <CrownFilled className="crownStyle" />}
 
       {isAdmin && player.id !== idUser && (
-        <button className="button-74" role="button">
+        <button className="button-74" role="button" onClick={() => onKickPlayer()}>
           Ouste !
         </button>
       )}

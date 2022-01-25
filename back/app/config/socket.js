@@ -36,6 +36,7 @@ module.exports = async (server) => {
         io.to(roomSocketId).emit("userLeftRoom", { userId });
         socket.emit("getKicked", "You have been kicked");
       } catch (e) {
+        console.log(e);
         throw new Error("Error with socket services removeUserFromRoom|500");
       }
     },

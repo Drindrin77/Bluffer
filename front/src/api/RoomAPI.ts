@@ -1,5 +1,6 @@
 import { securedApi } from "../config";
 import { Room } from "../types/RoomType";
+import { User } from "../types/UserType";
 
 export namespace RoomAPI {
   export async function createRoom(): Promise<Room> {
@@ -16,5 +17,9 @@ export namespace RoomAPI {
 
   export async function joinRoom(idRoomSocket): Promise<Room> {
     return securedApi.post("/userRooms", { idRoomSocket });
+  }
+
+  export async function kickPlayer(idRoom, idKickedPlayer): Promise<User> {
+    return securedApi.post(`/rooms/${idRoom}/kick`, { userId: idKickedPlayer });
   }
 }

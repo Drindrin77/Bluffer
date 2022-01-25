@@ -33,6 +33,12 @@ export const Lobby = (props) => {
           dispatch(getRoomRequest({ idRoom: room.id }));
         }
       });
+      socket.on("userLeftRoom", (data) => {
+        dispatch(getRoomRequest({ idRoom: room.id }));
+      });
+      socket.on("getKicked", (data) => {
+        //redirect to welcome with props
+      });
     }
   }, [socket]);
 

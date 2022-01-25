@@ -26,9 +26,6 @@ module.exports = {
     }
   },
   isRoomsADM: async (req, res, next) => {
-    console.log("isrooms");
-    console.log(req.params);
-    console.log(req.currentUser);
     try {
       const room = await Room.findOne({
         where: {
