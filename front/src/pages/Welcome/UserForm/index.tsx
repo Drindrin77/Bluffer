@@ -30,6 +30,7 @@ export const UserCreation = (props: UserCreationProps) => {
 
   React.useEffect(() => {
     if (room) {
+      console.log("roo");
       history.push("/lobby/");
     }
   }, [room]);

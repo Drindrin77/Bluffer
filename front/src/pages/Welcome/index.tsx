@@ -11,6 +11,7 @@ import { ParentPage } from "../../components/ParentPage";
 
 export const Welcome = (props) => {
   const { id } = useParams();
+  console.log(props);
 
   return (
     <ParentPage>

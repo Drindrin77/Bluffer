@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux-saga/reducers";
 import { invitLink } from "../../types/RoomType";
 import { useHistory } from "react-router-dom";
-import { getRoomRequest, updateRoom } from "../../redux-saga/actions/RoomsActions";
+import { getRoomRequest, kickUserRequest, updateRoom } from "../../redux-saga/actions/RoomsActions";
 import rooms from "../../redux-saga/reducers/rooms";
 import { socket } from "../../socket";
 import { ParentPage } from "../../components/ParentPage";
@@ -21,6 +21,7 @@ export const Lobby = (props) => {
   const { pending, room, error } = useSelector((state: RootState) => state.room);
   const isAdmin = room && user && room.idAdmin == user.id;
   const dispatch = useDispatch();
+  const history = useHistory();
 
   React.useEffect(() => {
     if (socket) {
@@ -37,7 +38,11 @@ export const Lobby = (props) => {
         dispatch(getRoomRequest({ idRoom: room.id }));
       });
       socket.on("getKicked", (data) => {
-        //redirect to welcome with props
+        dispatch(kickUserRequest());
+        history.push({
+          pathname: "/",
+          state: { test: "aze" },
+        });
       });
     }
   }, [socket]);

@@ -29,3 +29,7 @@ export const joinRoomRequest = (payload) => ({
   type: SagaType.JOIN_ROOM_REQUEST,
   payload,
 });
+
+export const kickUserRequest = () => ({
+  type: SagaType.KICK_USER_REQUEST,
+});
