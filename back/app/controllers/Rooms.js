@@ -102,13 +102,19 @@ module.exports = (app) => {
           },
         });
         if (!userToKick) {
-          throw new Error(`User with id ${user.id} is not in the Room with id ${room.id}|404`);
+          throw new Error(
+            `User with id ${user.id} is not in the Room with id ${room.id}|404`
+          );
         }
 
         await userToKick.destroy();
 
         const socketHandler = app.get("socketHandler");
-        socketHandler.services.removeUserFromRoom(user.id, user.socketId, room.idRoomSocket);
+        socketHandler.services.removeUserFromRoom(
+          user.id,
+          user.socketId,
+          room.idRoomSocket
+        );
 
         res.status(200).send(userToKick);
       } catch (e) {

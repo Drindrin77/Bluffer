@@ -34,7 +34,6 @@ module.exports = {
         },
       });
       if (!room) {
-        console.log("la");
         throw new Error("Unauthorized|401");
       }
       return next();
@@ -64,6 +63,23 @@ module.exports = {
       return next();
     } catch (e) {
       return next(e);
+    }
+  },
+
+  teamIsFull: async (req, res, next) => {
+    try {
+      const room = await Room.findOne({
+        where: { idRoomSocket: req.body.idRoomSocket },
+      });
+      const { count } = await UserRoom.findAndCountAll({
+        where: { roomId: room.id },
+      });
+      if (count >= room.nbPlayerMax) {
+        throw new Error("Team is full|403");
+      }
+      return next();
+    } catch (e) {
+      throw new Error("Team is full|403");
     }
   },
 };

@@ -6,6 +6,12 @@ module.exports = async function (sequelize, DataTypes) {
   const User = sequelize.define(
     name,
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
       username: {
         type: DataTypes.STRING,
         allowNull: false,

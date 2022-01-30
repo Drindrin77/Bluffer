@@ -6,6 +6,12 @@ module.exports = async function (sequelize, DataTypes) {
   const Room = sequelize.define(
     name,
     {
+      id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+        allowNull: false,
+      },
       nbPlayerMax: {
         type: DataTypes.INTEGER,
         allowNull: false,
